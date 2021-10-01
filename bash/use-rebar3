@@ -1,0 +1,18 @@
+if [ $# -eq 0 ]; then
+   if [ -d ~/.cache/rebar3 ]; then
+      for f in ~/.cache/rebar3/vsns/*; do
+         v=$(basename $f)
+      done
+      echo "$v"
+   fi
+else
+   if [ -d ~/.cache/rebar3-$1 ]; then
+      if [ -d ~/.cache/rebar3 ]; then
+         for f in ~/.cache/rebar3/vsns/*; do
+            v=$(basename $f)
+         done
+         mv ~/.cache/rebar3 ~/.cache/rebar3-"$v"
+      fi
+      mv ~/.cache/rebar3-$1 ~/.cache/rebar3
+   fi
+fi
