@@ -111,6 +111,15 @@ $ nvm use v16.10.0
 $ nvm current
 $ npm --version
 $ node --version
+
+$ vi ~/.direnvrc
+
+use_nodejs() {
+    NODE_VERSION="$1"
+
+    type nvm >/dev/null 2>&1 || . ~/.nvm/nvm.sh --no-use
+    nvm use "$NODE_VERSION"
+}
 ```
 
 ## Visual Studio Code
@@ -161,10 +170,7 @@ $ lsblk
 $ cp -r /media/martin/disk/Linux/Tests/elm/buttons ./
 $ ls
 $ cd buttons
-$ echo 'export NVM_DIR="$HOME/.nvm"' >> .envrc
-$ echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm' >> .envrc
-$ echo '[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion' >> .envrc
-$ echo 'nvm use v14.18.0' >> .envrc
+$ echo 'use nodejs v14.18.0' >> .envrc
 $ cat .envrc
 $ direnv allow
 $ cd ..
@@ -225,6 +231,14 @@ $ kerl status
 $ erl -version
 $ erl
 1> halt().
+
+$ vi ~/.direnvrc
+
+use_erlang() {
+    ERLANG_VERSION="$1"
+
+    . ~/erlang/$ERLANG_VERSION/activate
+}
 ```
 
 ## rebar3
@@ -237,7 +251,7 @@ $ cd ~/rebar3
 $ wget https://github.com/erlang/rebar3/archive/refs/tags/3.17.0.tar.gz -O -| tar xzvf -
 $ ls
 $ cd rebar3-3.17.0
-$ echo '. ~/erlang/24.1/activate' >> .envrc
+$ echo 'use erlang 24.1' >> .envrc
 $ cat .envrc
 $ direnv allow
 $ cd ..
@@ -257,7 +271,7 @@ $ cd ~/rebar3
 $ wget https://github.com/erlang/rebar3/archive/refs/tags/3.15.2.tar.gz -O -| tar xzvf -
 $ ls
 $ cd rebar3-3.15.2
-$ echo '. ~/erlang/23.3.4.7/activate' >> .envrc
+$ echo 'use erlang 23.3.4.7' >> .envrc
 $ cat .envrc
 $ direnv allow
 $ cd ..
@@ -286,7 +300,7 @@ $ lsblk
 $ cp -r /media/martin/disk/Linux/Tests/erlang/hello_world ./
 $ ls
 $ cd hello_world
-$ echo '. ~/erlang/24.1/activate' >> .envrc
+$ echo 'use erlang 24.1' >> .envrc
 $ echo 'PATH_add ~/.cache/rebar3/bin' >> .envrc
 $ cat .envrc
 $ direnv allow
